@@ -35,12 +35,12 @@ class MyApp extends StatelessWidget {
         },
         'home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
       },
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (context) {
-          String routeName = settings.name;
-          print(routeName);
-        })
-      },
+//      onGenerateRoute: (RouteSettings settings) {
+//        return MaterialPageRoute(builder: (context) {
+//          String routeName = settings.name;
+//          print(routeName);
+//        })
+//      },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
