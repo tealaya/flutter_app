@@ -27,19 +27,10 @@ class MyApp extends StatelessWidget {
         'new_page': (context) => NewRoute(),
         'tip_route': (context) {
           return TipRoute(
-            text: ModalRoute
-                .of(context)
-                .settings
-                .arguments,
+            text: ModalRoute.of(context).settings.arguments,
           );
         },
         'home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (context) {
-          String routeName = settings.name;
-          print(routeName);
-        })
       },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -135,10 +126,7 @@ class EchoRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //获取路由参数
-    var args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
+    var args = ModalRoute.of(context).settings.arguments;
 
     print(args);
     return Scaffold(

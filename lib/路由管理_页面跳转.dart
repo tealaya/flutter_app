@@ -20,27 +20,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "home",
-      //名为"/"的路由作为应用的home(首页)
-      routes: {
-        'new_page2': (context) => EchoRoute(),
-        'new_page': (context) => NewRoute(),
-        'tip_route': (context) {
-          return TipRoute(
-            text: ModalRoute
-                .of(context)
-                .settings
-                .arguments,
-          );
-        },
-        'home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (context) {
-          String routeName = settings.name;
-          print(routeName);
-        })
-      },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -92,62 +71,56 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: RouterTestRoute(),
-    );
-  }
-}
-
-class RouterTestRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: RaisedButton(
-        color: Colors.red,
-        textColor: Colors.blue,
-        onPressed: () async {
-          // 打开`TipRoute`，并等待返回结果
-//          var result = await Navigator.push(
-//            context,
-//            MaterialPageRoute(
-//              builder: (context) {
-//                return TipRoute(
-//                  // 路由参数
-//                  text: "我是提示xxxx",
-//                );
-//              },
-//            ),
-//          );
-
-          var result = await Navigator.of(context)
-              .pushNamed("tip_route", arguments: "hi");
-          //输出`TipRoute`路由返回结果
-          print("路由返回值: $result");
-
-//          Navigator.of(context).pushNamed("new_page2", arguments: "hi");
-        },
-        child: Text("打开提示页"),
-      ),
-    );
-  }
-}
-
-class EchoRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //获取路由参数
-    var args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
-
-    print(args);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("NEchoRoutete"),
-      ),
       body: Center(
-        child: Text("This is  EwerrrrrrrchoRoute"),
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Invoke "debug painting" (press "p" in the console, choose the
+          // "Toggle Debug Paint" action from the Flutter Inspector in Android
+          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+          // to see the wireframe for each widget.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.display1,
+            ),
+            FlatButton(
+              child: Text("open new route"),
+              textColor: Colors.blue,
+              onPressed: () {
+                //导航到新路由
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return NewRoute();
+                    },
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
@@ -161,37 +134,6 @@ class NewRoute extends StatelessWidget {
       ),
       body: Center(
         child: Text("This is new route"),
-      ),
-    );
-  }
-}
-
-class TipRoute extends StatelessWidget {
-  TipRoute({
-    Key key,
-    @required this.text, // 接收一个text参数
-  }) : super(key: key);
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("提示"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(18),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Text(text),
-              RaisedButton(
-                onPressed: () => Navigator.pop(context, "我是返回值"),
-                child: Text("返回"),
-              )
-            ],
-          ),
-        ),
       ),
     );
   }

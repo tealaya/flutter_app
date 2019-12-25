@@ -20,27 +20,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "home",
-      //名为"/"的路由作为应用的home(首页)
-      routes: {
-        'new_page2': (context) => EchoRoute(),
-        'new_page': (context) => NewRoute(),
-        'tip_route': (context) {
-          return TipRoute(
-            text: ModalRoute
-                .of(context)
-                .settings
-                .arguments,
-          );
-        },
-        'home': (context) => MyHomePage(title: 'Flutter Demo Home Page'),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        return MaterialPageRoute(builder: (context) {
-          String routeName = settings.name;
-          print(routeName);
-        })
-      },
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -106,61 +85,21 @@ class RouterTestRoute extends StatelessWidget {
         textColor: Colors.blue,
         onPressed: () async {
           // 打开`TipRoute`，并等待返回结果
-//          var result = await Navigator.push(
-//            context,
-//            MaterialPageRoute(
-//              builder: (context) {
-//                return TipRoute(
-//                  // 路由参数
-//                  text: "我是提示xxxx",
-//                );
-//              },
-//            ),
-//          );
-
-          var result = await Navigator.of(context)
-              .pushNamed("tip_route", arguments: "hi");
+          var result = await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return TipRoute(
+                  // 路由参数
+                  text: "我是提示xxxx",
+                );
+              },
+            ),
+          );
           //输出`TipRoute`路由返回结果
           print("路由返回值: $result");
-
-//          Navigator.of(context).pushNamed("new_page2", arguments: "hi");
         },
         child: Text("打开提示页"),
-      ),
-    );
-  }
-}
-
-class EchoRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //获取路由参数
-    var args = ModalRoute
-        .of(context)
-        .settings
-        .arguments;
-
-    print(args);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("NEchoRoutete"),
-      ),
-      body: Center(
-        child: Text("This is  EwerrrrrrrchoRoute"),
-      ),
-    );
-  }
-}
-
-class NewRoute extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("New route"),
-      ),
-      body: Center(
-        child: Text("This is new route"),
       ),
     );
   }
