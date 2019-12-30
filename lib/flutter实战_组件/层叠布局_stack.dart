@@ -33,16 +33,15 @@ class _FormTestRouteState extends State<FormTestRoute> {
       body: ConstrainedBox(
         constraints: BoxConstraints.expand(),
         child: Stack(
-          alignment: Alignment.center,
-          fit: StackFit.expand, //未定位widget占满Stack整个空间
+          alignment: Alignment.center, //指定未定位或部分定位widget的对齐方式
           children: <Widget>[
-            Positioned(
-              left: 18.0,
-              child: Text("I am Jack"),
-            ),
             Container(
               child: Text("Hello world", style: TextStyle(color: Colors.white)),
               color: Colors.red,
+            ),
+            Positioned(
+              left: 18.0,
+              child: Text("I am Jack"),
             ),
             Positioned(
               top: 18.0,
