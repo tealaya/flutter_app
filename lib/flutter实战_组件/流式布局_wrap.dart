@@ -46,17 +46,14 @@ class _FormTestRouteState extends State<FormTestRoute> {
           Wrap(
 //            direction:Axis.vertical,
             spacing: 20, // 主轴(水平)方向间距
-            runSpacing: 20, // 纵轴（垂直）方向间距
+            runSpacing: 50, // 纵轴（垂直）方向间距
             alignment: WrapAlignment.start, //沿主轴方向居中
             children: <Widget>[
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.indigoAccent,
-                child: new Chip(
-                  avatar: new CircleAvatar(
-                      backgroundColor: Colors.blue, child: Text('A')),
-                  label: new Text('Hamilton'),
+              Text(
+                '煽风点火不v',
+                style: TextStyle(
+                  color: Colors.indigoAccent,
+                  fontSize: 20,
                 ),
               ),
               new Chip(
